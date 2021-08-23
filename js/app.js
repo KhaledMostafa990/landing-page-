@@ -175,25 +175,25 @@ scrollToTopBtn.addEventListener("click", () => {
  *
  */
 
-// const activeItemOfsec = () => {
-//   for (section of sections) {
-//     let sectionView = section.getBoundingClientRect();
-//     let topSectionView = sectionView.top;
-//     console.log(topSectionView);
+const activeItemOfsec = () => {
+  for (section of sections) {
+    let sectionView = section.getBoundingClientRect();
+    let topSectionView = sectionView.top;
+    console.log(topSectionView);
 
-//     if (
-//       topSectionView > 0 &&
-//       topSectionView <= 600 &&
-//       !navItem.classList.contains("active-section")
-//     ) {
-//       addClass(navItem, "active-section");
-//     } else {
-//       removeClass(navItem, "active-section");
-//     }
-//   }
-// };
+    if (
+      topSectionView > 0 &&
+      topSectionView <= 600 &&
+      !navItem.classList.contains("active-section")
+    ) {
+      addClass(navItem, "active-section");
+    } else {
+      removeClass(navItem, "active-section");
+    }
+  }
+};
 
-// document.addEventListener("scroll", activeItemOfsec);
+document.addEventListener("scroll", activeItemOfsec);
 
 /**
  * End Main Functions
