@@ -80,8 +80,11 @@ sections.forEach((elem, indx, arr) => {
   // create li element for nav
   navItem = document.createElement("li");
   navbarList.appendChild(navItem);
-  // Set the class attr to styling items
+  // styling items
   addClass(navItem, "menu__link");
+  navItem.style.cssText = `
+display:inline-block;
+`;
   let dataNav = elem.getAttribute("data-nav"); // Get the name of the specific section to set inner li
   navItem.innerHTML = dataNav;
   // When clicking an item, listening for the click event,
@@ -102,11 +105,11 @@ const changeActiveSec = () => {
       // this number might need changed by follow viewport needs
       topOfSectionView >= 0 &&
       topOfSectionView <= 400 &&
-      !section.classList.contains("active-class")
+      !section.classList.contains("your-active-class")
     ) {
-      addClass(section, "active-class");
+      addClass(section, "your-active-class");
     } else {
-      removeClass(section, "active-class");
+      removeClass(section, "your-active-class");
     }
   }
 };
@@ -123,13 +126,12 @@ const hideNav = () => {
     // set timeout between add and remove the hidden class
     setTimeout(() => {
       addClass(navbarList, "hidden");
-    }, 100);
+    }, 200);
   } else {
     setTimeout(() => {
       removeClass(navbarList, "hidden");
-    }, 750);
+    }, 1000);
   }
-
   // return document.addEventListener("scroll", hideNav);
 };
 // hideNav();
@@ -174,27 +176,39 @@ scrollToTopBtn.addEventListener("click", () => {
  * show which section in the nav is viewed while scroling
  *
  */
-
+// get an li list as array
+const allNavItem = document.querySelectorAll("li");
 const activeItemOfsec = () => {
-  for (section of sections) {
-    let sectionView = section.getBoundingClientRect();
-    let topSectionView = sectionView.top;
+  sections.forEach((elem, indx, arr) => {
+    let View = elem.getBoundingClientRect();
+    let topSectionView = View.top;
     console.log(topSectionView);
-
-    if (
-      topSectionView > 0 &&
-      topSectionView <= 600 &&
-      !navItem.classList.contains("active-section")
-    ) {
-      addClass(navItem, "active-section");
-    } else {
-      removeClass(navItem, "active-section");
+    if (topSectionView > -100 && topSectionView <= 400) {
+      allNavItem.forEach((elm, indx, arr) => {
+        if (
+          topSectionView < -120 ||
+          topSectionView >= 400 ||
+          elm.classList.contains("your-active-class")
+        ) {
+          setTimeout(() => {
+            removeClass(elm, "your-active-class");
+          }, 500);
+        } else if (
+          elm.textContent === elem.getAttribute("data-nav") &&
+          !elm.classList.contains("your-active-class")
+        ) {
+          setTimeout(() => {
+            addClass(elm, "your-active-class");
+          }, 400);
+        }
+      });
     }
-  }
+  });
 };
 
 document.addEventListener("scroll", activeItemOfsec);
 
+// console.log(sections);
 /**
  * End Main Functions
  */
