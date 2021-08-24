@@ -13,7 +13,7 @@ by Udacity, eg FWD, itida.
 the project are usful to practice on what we learn before through the nanodegree.
 the landing also requier from us research to get some methods we are not learning yet.
 
-##### requirments
+# requirments
 
 ## 1- add new section to html (not require javascript)
 
